@@ -1,8 +1,7 @@
 {
+  "enableAutoprefixer": true,
   "includePaths": [
     ".meteor/local/build/programs/server/assets/packages/wolves_bourbon",
-    ".meteor/local/build/programs/server/assets/packages/wolves_bitters",
-    ".meteor/local/build/programs/server/assets/packages/wolves_neat",
-    ".meteor/local/build/programs/server/assets/packages/faichenshing_refills"
+    ".meteor/local/build/programs/server/assets/packages/faichenshing_bootstrap4-sass"
   ]
 }

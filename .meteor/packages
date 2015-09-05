@@ -22,10 +22,11 @@ aldeed:delete-button
 ongoworks:security
 reywood:publish-composite
 mquandalle:jade
-simple:markdown-templating
 fourseven:scss
 wolves:bourbon
 wolves:neat
 wolves:bitters
 lalomartins:markd
 johnantoni:meteor-normalize
+underscore
+faichenshing:bootstrap4-sass

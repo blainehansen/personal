@@ -1,9 +1,66 @@
 head
-	title dummy
+	title Blaine Hansen
 
-body
-	.box
-		+thing
+template(name="home")
+	h1 Welcome to My Site
+	p This is my personal website, where I talk about everything I do.
 
-template(name="thing")
-	.thing
+template(name="header")
+	#header
+		h1.display-1.text-center Blaine Hansen
+		#twitter.text-center
+			+twitter
+
+		nav.text-center
+			a(href="/blog") Blog
+			a(href="/projects") Projects
+			a(href="/categories") Categories
+
+template(name="footer")
+	#footer
+		h6 Social links or whatever.
+
+template(name="layout")
+	.container-fluid
+		+header
+		main
+			#content {{> yield}}
+		+footer
+
+template(name="blogIndex")
+	each this
+		a(href="/blog/{{_id}}")
+			h3 #{title}
+		p #{thesis}
+
+template(name="blogPost")
+	h1 #{title}
+	p #{thesis}
+	| {{> Template.dynamic template=_id}}
+
+template(name="projectsIndex")
+	each this
+		a(href="/projects/{{_id}}")
+			h3 #{title}
+		p #{summary}
+
+template(name="project")
+	h3 #{title}
+	p #{summary}
+	| {{> Template.dynamic template=_id}}
+
+template(name="tagsIndex")
+	each this
+		p
+			a(href="/categories/{{this}}") #{this}
+
+template(name="tag")
+	each this
+		if summary
+			a(href="/projects/{{_id}}")
+				h3 #{title}
+			p #{summary}
+		else
+			a(href="/blog/{{_id}}")
+				h3 #{title}
+			p #{thesis}
