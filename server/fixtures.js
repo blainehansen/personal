@@ -1,5 +1,5 @@
 // if (Meteor.users.find().count() < 2) {
-// 	record_id = Accounts.createUser({email: 'faichenshing@gmail.com', password: "nameless"});
+// 	record_id = Accounts.createUser({email: 'faichenshing@gmail.com', password: "password"});
 // }
 
 // var blaine = Meteor.users.findOne({firstname: "Blaine", lastname: "Hansen", admin: true});
@@ -8,9 +8,7 @@
 // }
 
 
-// Meteor.startup(function() {
-// 	process.env.MAIL_URL = 'smtp://postmaster%40sandbox83338.mailgun.org:9zggvz4f10-9@smtp.mailgun.org:587';
-// });
+
 
 
 // Accounts.emailTemplates.from = "Blaine Hansen <blainehansenclassicalpiano@gmail.com>";

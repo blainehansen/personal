@@ -1,0 +1,6 @@
+node_modules
+private
+.deploy
+
+server/secrets.js
+client/content

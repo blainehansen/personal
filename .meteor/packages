@@ -4,16 +4,13 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
-autopublish
-insecure
 iron:router
-accounts-password
-accounts-ui
-random
-email
-spiderable
-reactive-var
+accounts-password@1.3.3
+accounts-ui@1.1.9
+random@1.0.10
+email@1.1.18
+spiderable@1.0.14-release-testing.0
+reactive-var@1.0.11
 alanning:roles
 aldeed:collection2
 aldeed:autoform
@@ -22,11 +19,27 @@ aldeed:delete-button
 ongoworks:security
 reywood:publish-composite
 mquandalle:jade
-fourseven:scss
-wolves:bourbon
-wolves:neat
-wolves:bitters
-lalomartins:markd
 johnantoni:meteor-normalize
-underscore
-faichenshing:bootstrap4-sass
+underscore@1.0.10
+nemo64:bootstrap
+less@2.7.8
+fortawesome:fontawesome
+momentjs:moment
+meteor-base@1.0.4
+mobile-experience@1.0.4
+mongo@1.1.14
+blaze-html-templates
+session@1.1.7
+jquery@1.11.10
+tracker@1.1.1
+logging@1.1.16
+reload@1.1.11
+ejson@1.0.13
+spacebars
+check@1.2.4
+faichenshing:collection-files
+simple:highlight.js
+manuelschoebel:ms-seo
+standard-minifier-css
+standard-minifier-js
+shell-server

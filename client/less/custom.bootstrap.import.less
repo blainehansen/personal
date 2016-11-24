@@ -1,0 +1,84 @@
+// This File is for you to modify!
+// It won't be overwritten as long as it exists.
+// You may include this file into your less files to benefit from
+// mixins and variables that bootstrap provides.
+
+@import "custom.bootstrap.mixins.import.less";
+@import "theme-variables.import.less";
+@import "theme-styles.import.less";
+
+#twitter a {
+	&:hover {
+		color: #00aced;
+	}
+}
+#github a {
+	&:hover {
+		color: #6cc644;
+	}
+}
+#youtube a {
+	&:hover {
+		color: #cd201f;
+	}
+}
+
+.navbar-brand span {
+	&:hover {
+		color: darken(@brand-primary, 15%);
+	}
+	
+}
+
+#sticky {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+
+.big-tag {
+	display: inline-block;
+}
+
+#footer {
+	margin-top: 50px;
+}
+
+.post-tag-list {
+	margin-top: 30px;
+}
+
+// BLAINE
+@btn-project-color: #fff;
+@btn-project-bg: #000;
+@btn-project-border: transparent;
+
+#btn(project, @btn-project-bg);
+.btn-project {
+	.button-variant(@btn-project-color, @btn-project-bg, @btn-project-border);
+	&:hover {
+		color: @btn-project-color;
+	}
+}
+
+.comments {
+	margin-top: 40px;
+}
+
+.thesis {
+	.lead();
+	margin-bottom: 11.5px; 
+}
+
+#featured-tags {
+	line-height: 2.4;
+}
+
+img {
+	width: 90%;
+	display: block;
+}
+
+.embed-responsive {
+	margin: 15px;
+}

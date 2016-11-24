@@ -1,66 +1,227 @@
 head
-	title Blaine Hansen
+	//- link(rel="icon" type="image/ico" href="/favicon.ico")
+	link(href="http://blainehansen.co" rel="canonical")
+	meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+
+template(name="welcomeContent")
+	h1 Welcome
+	p.lead This is my personal website, where I share my thoughts, and give updates about my projects. Basically, this is a site to show the world all of my different pursuits.
+	p.lead I've just started writing down my ideas, and I'm very excited to hear your thoughts!
+	//- p.lead I am interested in many areas. Here are some important ones you could start with:
+	p#featured-tags.lead
+		each featuredTags
+			+spitTag
+			| &nbsp;
 
 template(name="home")
-	h1 Welcome to My Site
-	p This is my personal website, where I talk about everything I do.
+	.jumbotron
+		+welcomeContent
+
+	+recentWork
+
+template(name="recentWork")
+	#recent
+		h1 Recent Work
+		each recent
+			+postLink
 
 template(name="header")
-	#header
-		h1.display-1.text-center Blaine Hansen
-		#twitter.text-center
-			+twitter
+	nav.navbar.navbar-default.navbar-static-top
+		.container-fluid
+			.row
+				.col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+					// Brand and toggle get grouped for better mobile display
+					.navbar-header
+						button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						a.navbar-brand(href='/')
+							span.text-primary Blaine Hansen
+					// Collect the nav links, forms, and other content for toggling
+					#bs-example-navbar-collapse-1.collapse.navbar-collapse
+						ul.nav.navbar-nav
+							li
+								a(href="/blog") Blog
+							li
+								a(href="/projects/portfolio") Portfolio
+							li
+								a(href="/projects") Projects
+							li
+								a(href="/tags") Tags
+						ul.nav.navbar-nav.navbar-right
+							li#twitter
+								a(href="https://twitter.com/blainehhansen" target="_blank")
+									span.fa.fa-twitter.fa-lg
+							li#github
+								a(href="https://github.com/blainehansen" target="_blank")
+									span.fa.fa-github.fa-lg
+							li#youtube
+								a(href="https://www.youtube.com/channel/UCFNzkAhKMqqIoGWk8M83T6A" target="_blank")
+									span.fa.fa-youtube-play.fa-lg
 
-		nav.text-center
-			a(href="/blog") Blog
-			a(href="/projects") Projects
-			a(href="/categories") Categories
 
 template(name="footer")
 	#footer
-		h6 Social links or whatever.
+	if onBlogPost
+		p.text-muted No comments section for you.
+			a(href="https://twitter.com/blainehhansen" target="_blank") @blainehhansen
+
+	p.text-muted Thank you. Come again.
 
 template(name="layout")
-	.container-fluid
-		+header
-		main
-			#content {{> yield}}
-		+footer
+	+header
+	main
+		.container-fluid
+			.row
+				.col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+					#content {{> yield}}
+			.row
+				.col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+					+footer
+
+	#sticky(hidden="{{hideToTopButton}}")
+		button.btn.btn-default
+			span.fa.fa-arrow-up.fa-lg
+
 
 template(name="blogIndex")
+	h4.text-muted A place for all my thoughts on the world.
+
 	each this
-		a(href="/blog/{{_id}}")
-			h3 #{title}
-		p #{thesis}
+		+postLink
 
 template(name="blogPost")
 	h1 #{title}
-	p #{thesis}
+	p.thesis #{thesis}
+	p
+		+littleTags
+	p.text-muted {{articleDate date}}
+
+	if repo
+		p
+			a.btn.btn-default(role="button" href="{{repo}}" target="_blank") GitHub
+	if demo
+		p
+			a.btn.btn-default(role="button" href="{{demo}}" target="_blank") Live Version
+
 	| {{> Template.dynamic template=_id}}
+
+	if nextArticle
+		a.btn.btn-default(role="button" href="blog/{{nextArticle}}")
+			| {{articleTitle nextArticle}}
+
+
+//- template(name="portfolioIndex")
+//- 	h4.text-muted All posts tagged with:
+//- 	with tag
+//- 		p.lead
+//- 			+spitTag(context=this omitLink="true")
+//- 			| &nbsp;
+//- 			if description
+//- 				span.text-muted - &nbsp;
+//- 				| #{description}
+//- 			if project
+//- 				span.text-muted - &nbsp;
+//- 				+littleTags
+//- 	each posts
+//- 		+postLink
+
+//- template(name="portfolio")
+//- 	h1 #{title}
+//- 	p.thesis #{thesis}
+//- 	p
+//- 		+littleTags
+//- 	p.text-muted {{articleDate date}}
+//- 	| {{> Template.dynamic template=_id}}
+
 
 template(name="projectsIndex")
+	h4.text-muted A place for all my different projects.
+
 	each this
-		a(href="/projects/{{_id}}")
-			h3 #{title}
-		p #{summary}
+		+projectLink
 
 template(name="project")
-	h3 #{title}
-	p #{summary}
-	| {{> Template.dynamic template=_id}}
+	with project
+		h3
+			+spitTag(context=this omitLink="true")
+			span.text-muted.small -
+				+littleTags
+		p.lead #{description}
+
+	each posts
+		+postLink
 
 template(name="tagsIndex")
+	h4.text-muted Tags I've given to my work.
+
 	each this
-		p
-			a(href="/categories/{{this}}") #{this}
+		p.lead
+			+spitTag
+			| &nbsp;
+			if description
+				span.text-muted - &nbsp;
+				| #{description}
+			if project
+				span.text-muted - &nbsp;
+				+littleTags
 
 template(name="tag")
-	each this
-		if summary
-			a(href="/projects/{{_id}}")
-				h3 #{title}
-			p #{summary}
+	h4.text-muted All posts tagged with:
+	with tag
+		p.lead
+			+spitTag(context=this omitLink="true")
+			| &nbsp;
+			if description
+				span.text-muted - &nbsp;
+				| #{description}
+			if project
+				span.text-muted - &nbsp;
+				+littleTags
+	each posts
+		+postLink
+
+
+
+template(name="projectLink")
+	h3
+		+spitTag
+		span.text-muted.small -
+			+littleTags
+	p.lead #{description}
+
+template(name="postLink")
+	h3
+		a(href="/blog/{{_id}}") #{title}
+	p.thesis #{thesis}
+	p
+		+littleTags
+	p.text-muted {{articleDate date}}
+		//- span.text-muted.small -
+		//- 	a(href="/blog/{{_id}}") read more...
+
+template(name="spitTag")
+	if context
+		if omitLink
+			a.btn(role="button" class="{{giveClass}}") {{dehyphen context._id}}
 		else
-			a(href="/blog/{{_id}}")
-				h3 #{title}
-			p #{thesis}
+			a.btn(role="button" href="/{{givePathRoot}}/{{context._id}}" class="{{giveClass}}") {{dehyphen context._id}}
+	else
+		if omitLink
+			a.btn(role="button" class="{{giveClass}}") {{dehyphen _id}}
+		else
+			a.btn(role="button" href="/{{givePathRoot}}/{{_id}}" class="{{giveClass}}") {{dehyphen _id}}
+
+
+template(name="littleTags")
+	each tagList
+		+spitTag(context=this size="xs")
+		| &nbsp;
+
+template(name="notFound")
+	h1 404 Error
+	p.lead I'm afraid I couldn't find the thing you're looking for. Perhaps you could enjoy some of these things?
+
+	+recentWork
